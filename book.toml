@@ -1,0 +1,6 @@
+[book]
+authors = ["Carl C"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Testing MDBook"
