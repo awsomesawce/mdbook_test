@@ -3,4 +3,8 @@
 This
 is
 a
-test
+test.
+
+## Why?
+
+This repo is a test.  I'm testing the `rust` program `mdbook` and it's capabilities compared to `gitbook`.
