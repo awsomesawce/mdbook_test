@@ -1,5 +1,0 @@
-# Chapter 2
-
-This is chapter 2 of my `mdbook`.  I'm excited to really start using this program and find out what it can do.  This program is capable of a lot of things and I've barely scratched the surface.
-After all, it's written in pure **Rust** language.  **Rust** is known to be a very secure and performant language right up there with **C**.  
-In fact, it's reference implementation is written in **C**, just like **Python**, except **Rust** is more **C**-like than **Python**.
