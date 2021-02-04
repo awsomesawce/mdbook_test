@@ -1,0 +1,53 @@
+MDBOOK(1)                        User Commands                       MDBOOK(1)
+
+
+
+NNAAMMEE
+       mdbook - manual page for mdbook v0.4.6
+
+DDEESSCCRRIIPPTTIIOONN
+       mdbook  v0.4.6  Mathieu David <mathieudavid@mathieudavid.org> Creates a
+       book from markdown files
+
+   UUSSAAGGEE::
+              mdbook [SUBCOMMAND]
+
+   FFLLAAGGSS::
+       --hh, ----hheellpp
+              Prints help information
+
+       --VV, ----vveerrssiioonn
+              Prints version information
+
+   SSUUBBCCOOMMMMAANNDDSS::
+       build  Builds a book from its markdown files
+
+       clean  Deletes a built book
+
+       help   Prints this message or the help of the given subcommand(s)
+
+       init   Creates the boilerplate structure and files for a new book
+
+       serve  Serves a book  at  http://localhost:3000,  and  rebuilds  it  on
+              changes
+
+       test   Tests that a book's Rust code samples compile
+
+       watch  Watches a book's files and rebuilds it on changes
+
+       For  more  information  about a specific command, try `mdbook <command>
+       ----hheellpp`   The   source   code   for    mdBook    is    available    at:
+       https://github.com/rust-lang/mdBook
+
+SSEEEE AALLSSOO
+       The  full  documentation  for mmddbbooookk is maintained as a Texinfo manual.
+       If the iinnffoo and mmddbbooookk programs are properly installed  at  your  site,
+       the command
+
+              iinnffoo mmddbbooookk
+
+       should give you access to the complete manual.
+
+
+
+mdbook v0.4.6                    February 2021                       MDBOOK(1)
