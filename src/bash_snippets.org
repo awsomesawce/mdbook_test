@@ -1,0 +1,13 @@
+#+TITLE: Testing Org snippets
+#+AUTHOR: Carl C
+
+* Testing Bash snippets inside org-mode
+
+#+BEGIN_SRC bash
+  a=2334
+  let "a += 1"
+  echo "a = $a "
+  echo
+#+END_SRC
+
+** TODO Fix Auto indent in org-mode
