@@ -89,11 +89,9 @@ The other tools `cmark-gfm`, `markdown`, `markdown-it`, `cmark-py3` don't proces
 
 > `kramdown` is referenced as a _superset_ of the **Markdown** language.
 
-```md
 First Term
 : This is the definition of the first term.
 
 Second Term
 : This is one definition of the second term.
 : This is another definition of the second term.
-```
