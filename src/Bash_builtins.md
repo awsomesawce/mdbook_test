@@ -1,0 +1,99 @@
+# Bash builtins
+
+DATE: Sat Feb  6 10:14:07 AM EST 2021
+
+> This is originally written in my `wsl-notes/shell_*` folder.
+> Copied today: Sat Feb  6 11:07:14 AM EST 2021
+
+[^1]
+[^1]: I used `read !date` to automatically read the output of the `date` command into the buffer.
+There are builtins in Bash (and Zsh) that exist where there is an executable of the same name.
+
+Here is a list of some examples.
+
+In both shells you can use the `builtin` command to reference the shell builtin instead of a different command of the same name.
+
+There is also an option for the shell to reference the executable _instead_ of the builtin.
+
+## Shell builtins
+
+### echo
+
+- `echo`: echo is available as a regular executable in `/usr/sbin/echo`.
+  **Difference**: `echo --help` will work if it references the executable, but when using the builtin it just echoes the word `--help`.
+  Use `bash -c "help echo"` to see bash's version of `echo`, and use `/usr/bin/echo --help` to see `coreutils` version of `echo`.
+  > For a more controllable way to print text in `zsh`, use `print`.  Check out `run-help print` on `zsh`.
+
+### printf
+
+- `printf`: this is available as both an exe and a builtin on both `bash` and `zsh`.
+  This utility is similar to `echo` in that it echos whatever you write into the terminal, but there are extra formatting rules.
+  These utilities try to mimic `C`'s `printf` utility by providing some of the same syntax.
+
+#### printf example
+
+```bash
+printf "My brother %s is %d years old.\n" Carl 34 Bubbah 46
+```
+
+This will substitute each `%s` with each string and each `%d` with each number I put in as an argument to the statement.
+
+  > Check out `bash -c "help printf"` or `man printf` for info on either one.
+
+### [ and test
+
+- [x] There is a program called `/usr/bin/[` and I'm not sure what it does. Figure out what it does.
+
+This tool is a synonym for the `test` program.  `test` is both a _builtin_ for **Zsh** and **Bash** but it's also a _standalone_ program provided by the `coreutils` package from **GNU**.
+They all do just about the same thing.
+For help, try `man [`, `/usr/bin/[ --help`.  In **Bash**, use `help "["`, in **Zsh** use `run-help [` and it will most likely bring up the `zshbuiltins` manpage.
+
+### Let's take a break
+
+So we've went thru a few shell builtins that exist as standalone programs in the **Unix**/**Linux** system.
+I think this aspect is both intriguing and confusing, since each implementation has it's own set of rules, settings and options.
+
+The great thing about this is that you can rely on having access to these functionalities no matter _which_ unix system you're on.  They're very much universal.  They don't call it **coreutils** for nothing!  They're in fact *core* to the system!
+
+### env
+
+`env` is a command that helps set the environment for a command.  If used with no arguments it prints _all_ the environment information available.
+This command isn't a bash builtin, but it's definitely available on any **POSIX** OS.  To find the POSIX manual for `env`, use `man 1p env`.
+
+### which
+
+This is both a standalone program _and_ a **Zsh** builtin.  When used from **Zsh**, it is actually a link to the `whence` builtin.
+Using `run-help which` will bring up the help page for `whence`.
+The `which` command in **Zsh** is equivalent to `whence -c`.  `-c` option just outputs in `csh` format, otherwise it's the same as `whence`.
+The difference between the `which` standalone exe and the **Zsh** version is that it works for finding shell functions and aliases too.
+Say you have an alias for `ls -alhF` with the name `l`, you can type `which l` and it will output all the information about that alias.
+This is much more powerful than the standalone `which`, which can only locate executables in "$PATH".
+
+#### which function for bash and csh
+
+`which` can be made into a function which will allow it to operate very similarly to **Zsh's** `which`.  Here it is:
+
+```bash
+    which ()
+    {
+        (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+    }
+    export -f which
+```
+
+## Definitions test
+
+This is to test how definitions are rendered.
+This technique only works when using `kramdown` to convert to html.
+The other tools `cmark-gfm`, `markdown`, `markdown-it`, `cmark-py3` don't process definition syntax like `kramdown` does.
+
+> `kramdown` is referenced as a _superset_ of the **Markdown** language.
+
+```md
+First Term
+: This is the definition of the first term.
+
+Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.
+```
