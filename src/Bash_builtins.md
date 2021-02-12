@@ -1,9 +1,10 @@
 # Bash builtins
 
+AUTHOR: Carl Capodice
 DATE: Sat Feb  6 10:14:07 AM EST 2021
+Updated: Thu Feb 11 09:51:33 PM EST 2021
 
 > This is originally written in my `wsl-notes/shell_*` folder.
-> Copied today: Sat Feb  6 11:07:14 AM EST 2021
 
 [^1]
 [^1]: I used `read !date` to automatically read the output of the `date` command into the buffer.
@@ -14,6 +15,9 @@ Here is a list of some examples.
 In both shells you can use the `builtin` command to reference the shell builtin instead of a different command of the same name.
 
 There is also an option for the shell to reference the executable _instead_ of the builtin.
+
+> INFO: You can type `builtin ` into bash and press <kbd>TAB</kbd> twice to see a list of builtins that bash provides.
+> You can do the same with zsh.  Note that zsh has more builtins than bash.
 
 ## Shell builtins
 
@@ -62,7 +66,10 @@ This command isn't a bash builtin, but it's definitely available on any **POSIX*
 
 ### which
 
-This is both a standalone program _and_ a **Zsh** builtin.  When used from **Zsh**, it is actually a link to the `whence` builtin.
+This is both a standalone program _and_ a **Zsh** builtin.  It is _not_ a **Bash** builtin!  
+It is used to find where an executable is located.  Use `which -a <progname>` to list all occurances of the specific program.
+In **Zsh**, it also lists aliases and functions.
+When used from **Zsh**, it is actually a link to the `whence` builtin.
 Using `run-help which` will bring up the help page for `whence`.
 The `which` command in **Zsh** is equivalent to `whence -c`.  `-c` option just outputs in `csh` format, otherwise it's the same as `whence`.
 The difference between the `which` standalone exe and the **Zsh** version is that it works for finding shell functions and aliases too.
@@ -80,6 +87,48 @@ This is much more powerful than the standalone `which`, which can only locate ex
     }
     export -f which
 ```
+
+### pwd
+
+`pwd` is available as both a _builtin_ and _program_ from `/bin/pwd` as part of coreutils.  
+`pwd` is available in **Powershell** as `Get-Location`.
+
+### true and false
+
+`true` is both a program (`/usr/bin/true`) and a builtin for `zsh` and `bash`.
+It is part of _GNU coreutils_.  
+The shell builtin version usually supercedes `/usr/bin/true`.
+
+`false` exists in `/usr/bin/false` as well as in builtins.
+
+### pushd and popd
+
+`pushd` and `popd` are builtins in both `bash` and `zsh`.  
+They don't exist as separate programs, but I felt it was necessary to include them in the list.
+They allow you to add directories to the _dirstack_, which is a list of directories you can easily `cd` to.
+
+### getopts and getopt
+
+`getopts` is a shell builtin in both **Bash** and **Zsh**.  
+`getopt` is an external program from the _util-linux_ utility bundle.  
+_util-linux_ is found on most **Linux**-based OS's.
+
+## Programs I thought were builtins
+
+Here lies a list of unix programs that I thought were actually builtins, but they're part of _coreutils_.
+
+### ls and dir
+
+1. `ls`: lists the content of a directory.
+  To get color output, you need to use `ls --color=auto`.
+  > It is an alias of the **Powershell** builtin `Get-ChildItem`.  By default, `Get-ChildItem` acts like `ls -l`.  
+  > If you want the traditional `ls` wide style, you have to use `Get-ChildItem | Format-Wide`.
+  > To get color output, use `Get-ChildItemColor`, an installed module from the internet.
+2. `dir`: does what `ls` does, but is usually aliased to something like `ls -lhF` for long-style output.
+3. `vdir`: does what `ls -l` does.  Use `--color=auto` to get color output.
+4. `dircolors`: this command allows you to setup color output on the `ls` and `dir` output.
+
+These and the other _coreutils_ programs are documented in `info coreutils`.
 
 ## Definitions test
 
