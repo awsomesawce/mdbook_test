@@ -113,6 +113,14 @@ They allow you to add directories to the _dirstack_, which is a list of director
 `getopt` is an external program from the _util-linux_ utility bundle.  
 _util-linux_ is found on most **Linux**-based OS's.
 
+### times, time
+
+`time` is both an external program and a **Bash** builtin.  It reports the time consumed by a pipeline's execution.  
+  **Example**: `time [ <pipeline> ]`; runs the pipeline and prints a report of time spent executing the command.
+  Variables TIMEFORMAT (bash) and TIMEFMT (zsh) alter the output of the report.
+`time` is available as a **Zsh** command, but it's not reported as a _builtin_.
+`times` is a **Bash** and **Zsh** builtin.  It displays process times for the system.
+
 ## Programs I thought were builtins
 
 Here lies a list of unix programs that I thought were actually builtins, but they're part of _coreutils_.
@@ -129,6 +137,7 @@ Here lies a list of unix programs that I thought were actually builtins, but the
 4. `dircolors`: this command allows you to setup color output on the `ls` and `dir` output.
 
 These and the other _coreutils_ programs are documented in `info coreutils`.
+
 
 ## Definitions test
 

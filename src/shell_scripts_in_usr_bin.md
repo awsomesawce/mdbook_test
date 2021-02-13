@@ -5,6 +5,7 @@ There exist a bunch of programs in `/usr/bin` that are actual **POSIX Shell Scri
 ## List of posix shell script executables in /usr/bin
 
 - `autoconf`: POSIX shell script as part of **GNU Autotools**.
+- `pass`: Popular linux password manager cli.  It's a Bash script.
 
 ## List of Perl script exes
 
