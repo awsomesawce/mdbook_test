@@ -138,6 +138,9 @@ Here lies a list of unix programs that I thought were actually builtins, but the
 
 These and the other _coreutils_ programs are documented in `info coreutils`.
 
+> **Zsh** actually has a bunch of file-system utilities as part of it's `zsh/files` module.
+> Check `man zshmodules` for more info.
+
 
 ## Definitions test
 
