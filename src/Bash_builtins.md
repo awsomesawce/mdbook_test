@@ -3,6 +3,9 @@
 AUTHOR: Carl Capodice
 DATE: Sat Feb  6 10:14:07 AM EST 2021
 Updated: Thu Feb 11 09:51:33 PM EST 2021
+UpdatedAgain: Friday, March 26, 2021 12:19:20 AM
+ 
+
 
 > This is originally written in my `wsl-notes/shell_*` folder.
 
@@ -87,6 +90,35 @@ This is much more powerful than the standalone `which`, which can only locate ex
     }
     export -f which
 ```
+
+#### which command equivalent in Powershell
+
+Since **Powershell** treats everything as _objects_ rather than just text, you get a lot of information
+back when you use `Get-Command` or `gcm` for short.  
+The way you get the same output as `which` would be to do this:
+
+```powershell
+Get-Command "echo" | Select-Object -ExpandProperty Source
+# Or
+gcm echo | select -exp Source
+# You can assign this as a function for less typing
+function pswhich {
+  Get-Command "$args" | Select-Object -expandproperty Source
+}
+# `$args' is the equivalent of `$*' in bash
+```
+
+### `type` and `typeset`
+
+`type -a` can give a similar output that `which -a` does, except `type` tells you what kind
+of command it is.
+`type` and `typeset` are not separate executables.  They only exist as shell builtins.
+
+`type` does some thing _completely_ different in **Windows** `cmd`: it acts like unix `cat` and
+outputs the content of a file.
+
+The equivalent command in **Powershell** is `Get-Command -ShowCommandInfo`.
+Or `gcm -all echo` to get all echo commands.
 
 ### pwd
 
