@@ -47,8 +47,9 @@ This will substitute each `%s` with each string and each `%d` with each number I
 
   > Check out `bash -c "help printf"` or `man printf` for info on either one.
 
-### [ and test
+### "`[`" and `test`
 
+TODO:
 - [x] There is a program called `/usr/bin/[` and I'm not sure what it does. Figure out what it does.
 
 This tool is a synonym for the `test` program.  `test` is both a _builtin_ for **Zsh** and **Bash** but it's also a _standalone_ program provided by the `coreutils` package from **GNU**.

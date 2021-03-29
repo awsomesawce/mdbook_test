@@ -7,3 +7,5 @@
 - [Bash_builtins](./Bash_builtins.md)
 - [test_file](./test.md)
 - [shell scripts locations](./shell_scripts_in_usr_bin.md)
+- [Tmux Commands](./Tmux_commands.md)
+- [Markdown Renderers](./Markdown_renderers.md)
