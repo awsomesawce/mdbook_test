@@ -140,6 +140,12 @@ The shell builtin version usually supercedes `/usr/bin/true`.
 They don't exist as separate programs, but I felt it was necessary to include them in the list.
 They allow you to add directories to the _dirstack_, which is a list of directories you can easily `cd` to.
 
+### shopt and setopt
+**Zsh** and **bash** both have a command that allows for changing shell options on the fly.
+`shopt` is **Bash**'s way of setting options.
+`setopt` is **Zsh**'s way of setting options.  
+Also, both shells have a `set` command.
+
 ### getopts and getopt
 
 `getopts` is a shell builtin in both **Bash** and **Zsh**.  
