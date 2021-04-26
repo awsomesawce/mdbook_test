@@ -1,6 +1,7 @@
 # Shell scripts as programs
 
-There exist a bunch of programs in `/usr/bin` that are actual **POSIX Shell Scripts**.  Here are a list of a few notable ones.
+There exist a bunch of programs in `/usr/bin` that are actual **POSIX Shell Scripts**.
+Here are a list of a few notable ones.
 
 ## List of posix shell script executables in /usr/bin
 
@@ -17,3 +18,7 @@ There exist a bunch of programs in `/usr/bin` that are actual **POSIX Shell Scri
 ## Nodejs Script
 
 These are mostly **UTF-8 Unicode** text executables, while the shell scripts are mostly ASCII text exes.
+
+## Remember
+
+When coming across a text executable, I usually copy it to a "copied_to_usr_bin" folder.
