@@ -1,0 +1,34 @@
+<h1 id="about-mdbook">About mdbook</h1>
+<p><code>mdbook</code> is a rust program that builds html documentation with <code>markdown</code> files.</p>
+<p>The build process is simple for users.  The only config needed is to make sure each page
+is denoted in your <code>SUMMARY.md</code> file.  The pages in that file are the ones that will be built.</p>
+<h2 id="options-and-arguments">Options and arguments</h2>
+<p>There are different options that can be parsed.</p>
+<h2 id="mdbook-help-output">Mdbook --help output</h2>
+<p>Next will be the output from the command <code>mdbook --help</code>.</p>
+<pre><code>mdbook v0.4.6
+Mathieu David &lt;mathieudavid@mathieudavid.org&gt;
+Creates a book from markdown files
+
+USAGE:
+    mdbook [SUBCOMMAND]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+SUBCOMMANDS:
+    build    Builds a book from its markdown files
+    clean    Deletes a built book
+    help     Prints this message or the help of the given subcommand(s)
+    init     Creates the boilerplate structure and files for a new book
+    serve    Serves a book at http://localhost:3000, and rebuilds it on changes
+    test     Tests that a book's Rust code samples compile
+    watch    Watches a book's files and rebuilds it on changes
+
+For more information about a specific command, try `mdbook &lt;command&gt; --help`
+The source code for mdBook is available at: https://github.com/rust-lang/mdBook
+</code></pre>
+<p>For some reason, after putting in this output, <code>nvim</code> goes crazy!
+I'm using <code>vim</code> atm.</p>
+

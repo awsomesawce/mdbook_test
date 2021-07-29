@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Journey of Learning Bash/Zsh/Pwsh</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Chapter 1</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Chapter 2</a></li><li class="chapter-item expanded "><a href="awk_snippets.html"><strong aria-hidden="true">3.</strong> awk snippets</a></li><li class="chapter-item expanded "><a href="bash_snippets.html"><strong aria-hidden="true">4.</strong> bash_snippets</a></li><li class="chapter-item expanded "><a href="Bash_builtins.html"><strong aria-hidden="true">5.</strong> Bash_builtins</a></li><li class="chapter-item expanded "><a href="shell_scripts_in_usr_bin.html"><strong aria-hidden="true">6.</strong> shell scripts locations</a></li><li class="chapter-item expanded "><a href="TypeLiterals_Powershell.html"><strong aria-hidden="true">7.</strong> Type Literals in Powershell</a></li><li class="chapter-item expanded "><a href="Tmux_commands.html"><strong aria-hidden="true">8.</strong> Tmux Commands</a></li><li class="chapter-item expanded "><a href="Markdown_renderers.html"><strong aria-hidden="true">9.</strong> Markdown Renderers</a></li><li class="chapter-item expanded "><a href="Just_Found_Out.html"><strong aria-hidden="true">10.</strong> Just_Found_Out</a></li><li class="chapter-item expanded "><a href="other_languages.html"><strong aria-hidden="true">11.</strong> Other Languages</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Journey of Learning Bash/Zsh/Pwsh</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+<p>Hello and <em>welcome</em> to my first test of the <strong>Rust</strong> program called <code>mdbook</code>.</p>
+<p>This is essentially a program that enables a writer to use the free markup language <strong>Markdown</strong> build and render 
+a book.<br />
+In order to create a book from <code>markdown</code> files, a few things need to be in order first.</p>
+<ul>
+<li>Summary page: This page gives a summary of what's going on in the book.</li>
+<li>Chapter pages.</li>
+<li><code>mdbook init</code> inside an empty repository to initialize the mdbook.</li>
+</ul>
+<h2 id="more-info"><a class="header" href="#more-info">More info</a></h2>
+<p>More info will be written into <a href="./Markdown_renderers.html">Markdown_renderers.md</a></p>
+<h1 id="chapter-2"><a class="header" href="#chapter-2">Chapter 2</a></h1>
+<p>This is chapter 2 of my <code>mdbook</code>.  I'm excited to really start using this program and find out what it can do.  This program is capable of a lot of things and I've barely scratched the surface.
+After all, it's written in pure <strong>Rust</strong> language.  <strong>Rust</strong> is known to be a very secure and performant language right up there with <strong>C</strong>.<br />
+In fact, it's reference implementation is written in <strong>C</strong>, just like <strong>Python</strong>, except <strong>Rust</strong> is more <strong>C</strong>-like than <strong>Python</strong>.</p>
+<h2 id="experimenting-with-emacs-linux-gui"><a class="header" href="#experimenting-with-emacs-linux-gui">Experimenting with Emacs linux GUI</a></h2>
+<p>So on <strong>Windows</strong> I don't get to be able to just <em>open a terminal</em> on <strong>Emacs</strong> without jumping thru a few hoops.  I'm sure I could do it for <strong>Powershell</strong> just fine, but I haven't found a good way to open a WSL linux shell in an Emacs buffer.</p>
+<p>Well now I can!</p>
+<p><em>Introducing the Emacs Linux GUI!</em>.  I'm now able to open a terminal emulator buffer by using the command <code>M-x ansi-term</code> in another buffer/window.</p>
+<p>This allows me to embed the command shell in the program I'm using <em>(Emacs)</em>.</p>
+<p>This has already been possible with <strong>Neovim</strong>, but having </p>
+<h2 id="installing-new-software"><a class="header" href="#installing-new-software">Installing new software</a></h2>
+<p>Installing new software on <strong>Arch Linux</strong> is pretty straightforward.  If I run into a <code>404</code> error when trying to install a package, I just run <code>sudo pacman -Syu</code> which updates my system and updates the mirror list.</p>
+<p>The reason this has to be done so often is because o</p>
+<p>I just installed <code>kgpg</code>, <code>kget</code>, <code>dolphin</code> (file browser), and <code>kde-cli-tools</code>.</p>
+<p>Now I'm installing some <strong>KDE</strong> applications.</p>
+<h2 id="problems-with-graphical-software"><a class="header" href="#problems-with-graphical-software">Problems with graphical software</a></h2>
+<p>I need to troubleshoot some things.  I guess I'm missing some dependencies for some things because I keep getting error messages about certain pieces of software.</p>
+<p>I run into errors with <code>dconf</code> all the time.</p>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Figure out what's up with <code>gnome-todo</code>.  I can't create a new task list or any tasks!  A todo list is useless if you can't create a todo!</li>
+</ul>
+<h1 id="awk-snippets"><a class="header" href="#awk-snippets">Awk snippets</a></h1>
+<p>This is a demonstration of how to display awesome documentation using <code>mdbook</code>.</p>
+<h2 id="snippet"><a class="header" href="#snippet">Snippet</a></h2>
+<p>This is an awk snippet for creating an html page with the argument specified.</p>
+<pre><code class="language-awk">BEGIN { print &quot;&lt;html&gt;\n&lt;head&gt;&lt;title&gt;Awk-generated HTML&lt;/title&gt;&lt;/head&gt;\n&lt;body bgcolor=\&quot;#ffffff\&quot;&gt;\n&lt;pre&gt;&quot; }
+{ print $0 }
+END { print &quot;&lt;/pre&gt;\n&lt;/body&gt;\n&lt;/html&gt;&quot; }
+</code></pre>
+<p>I used the <code>:read</code> command to read the file directly into the buffer!  It beats copy-pasting!</p>
+<h1 id="bash-snippets"><a class="header" href="#bash-snippets">Bash Snippets</a></h1>
+<p>Here are some snippets for <code>bash</code> scripting.
+Mainly this is just a place for me to take notes specifically about programming and not about the WSL file system.
+A lot of these ideas came from the Advanced Bash Scripting Guide, available at <a href="https://tldp.org/LDP/abs/html/">tldp.org</a></p>
+<h2 id="bash-variables-untyped"><a class="header" href="#bash-variables-untyped">Bash Variables (untyped)</a></h2>
+<p>Like many other programming languages, <code>bash</code> does not segregate its variables by &quot;type&quot;.<br />
+Essentially <em>bash variables are character strings</em>, but depending on context, arithmetic operations and comparisons are permitted.<br />
+The determining factor is whether the variable contains only digits.</p>
+<pre><code class="language-sh">a=2334
+let &quot;a += 1&quot;
+echo &quot;a = $a&quot;
+echo
+</code></pre>
+<p>The variable is set on the first line, then with the <code>let</code> shell builtin, bash is able to increment the value by 1.</p>
+<p><code>let &quot;a += 1&quot;</code> can be represented by <code>(( &quot;a += 1&quot; ))</code> instead.</p>
+<h2 id="using-declare-or-typeset-to-type-variables"><a class="header" href="#using-declare-or-typeset-to-type-variables">Using Declare or Typeset to type variables</a></h2>
+<p>Just like the name says, you are <em>typesetting</em> a variable using this method.
+I will list the options provided by the <code>declare</code>/<code>typeset</code> builtin.</p>
+<p><code>-r</code> <em>readonly</em></p>
+<p>(<code>declare -r var1</code> works the same as <code>readonly var1</code>)
+Note that this is roughly equivalent to the <em>C const</em> type qualifier.  An error message is shown when attempting to change a <em>readonly</em> variable.</p>
+<p><code>-i</code> <em>integer</em></p>
+<pre><code class="language-bash">declare -i numbah
+numbah=3
+echo &quot;Number = $numbah&quot;  # Number = 3
+numbah=three
+echo &quot;Number = $numbah&quot; # Number = 0
+# Tries to evaluate the string &quot;three&quot; as an integer.
+</code></pre>
+<h1 id="bash-builtins"><a class="header" href="#bash-builtins">Bash builtins</a></h1>
+<p>AUTHOR: Carl Capodice
+DATE: Sat Feb  6 10:14:07 AM EST 2021
+Updated: Thu Feb 11 09:51:33 PM EST 2021
+UpdatedAgain: Friday, March 26, 2021 12:19:20 AM</p>
+<blockquote>
+<p>This is originally written in my <code>wsl-notes/shell_*</code> folder.</p>
+</blockquote>
+<p><sup class="footnote-reference"><a href="#1">1</a></sup>
+<sup class="footnote-reference"><a href="#1">1</a></sup>: I used <code>read !date</code> to automatically read the output of the <code>date</code> command into the buffer.
+There are builtins in Bash (and Zsh) that exist where there is an executable of the same name.</p>
+<p>Here is a list of some examples.</p>
+<p>In both shells you can use the <code>builtin</code> command to reference the shell builtin instead of a different command of the same name.</p>
+<p>There is also an option for the shell to reference the executable <em>instead</em> of the builtin.</p>
+<blockquote>
+<p>INFO: You can type <code>builtin </code> into bash and press <kbd>TAB</kbd> twice to see a list of builtins that bash provides.
+You can do the same with zsh.  Note that zsh has more builtins than bash.</p>
+</blockquote>
+<h2 id="shell-builtins"><a class="header" href="#shell-builtins">Shell builtins</a></h2>
+<h3 id="echo"><a class="header" href="#echo">echo</a></h3>
+<ul>
+<li><code>echo</code>: echo is available as a regular executable in <code>/usr/sbin/echo</code>.
+<strong>Difference</strong>: <code>echo --help</code> will work if it references the executable, but when using the builtin it just echoes the word <code>--help</code>.
+Use <code>bash -c &quot;help echo&quot;</code> to see bash's version of <code>echo</code>, and use <code>/usr/bin/echo --help</code> to see <code>coreutils</code> version of <code>echo</code>.
+<blockquote>
+<p>For a more controllable way to print text in <code>zsh</code>, use <code>print</code>.  Check out <code>run-help print</code> on <code>zsh</code>.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="printf"><a class="header" href="#printf">printf</a></h3>
+<ul>
+<li><code>printf</code>: this is available as both an exe and a builtin on both <code>bash</code> and <code>zsh</code>.
+This utility is similar to <code>echo</code> in that it echos whatever you write into the terminal, but there are extra formatting rules.
+These utilities try to mimic <code>C</code>'s <code>printf</code> utility by providing some of the same syntax.</li>
+</ul>
+<h4 id="printf-example"><a class="header" href="#printf-example">printf example</a></h4>
+<pre><code class="language-bash">printf &quot;My brother %s is %d years old.\n&quot; Carl 34 Bubbah 46
+</code></pre>
+<p>This will substitute each <code>%s</code> with each string and each <code>%d</code> with each number I put in as an argument to the statement.</p>
+<blockquote>
+<p>Check out <code>bash -c &quot;help printf&quot;</code> or <code>man printf</code> for info on either one.</p>
+</blockquote>
+<h3 id="-and-test"><a class="header" href="#-and-test">&quot;<code>[</code>&quot; and <code>test</code></a></h3>
+<p>TODO:</p>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+There is a program called <code>/usr/bin/[</code> and I'm not sure what it does. Figure out what it does.</li>
+</ul>
+<p>This tool is a synonym for the <code>test</code> program.  <code>test</code> is both a <em>builtin</em> for <strong>Zsh</strong> and <strong>Bash</strong> but it's also a <em>standalone</em> program provided by the <code>coreutils</code> package from <strong>GNU</strong>.
+They all do just about the same thing.
+For help, try <code>man [</code>, <code>/usr/bin/[ --help</code>.  In <strong>Bash</strong>, use <code>help &quot;[&quot;</code>, in <strong>Zsh</strong> use <code>run-help [</code> and it will most likely bring up the <code>zshbuiltins</code> manpage.</p>
+<h3 id="lets-take-a-break"><a class="header" href="#lets-take-a-break">Let's take a break</a></h3>
+<p>So we've went thru a few shell builtins that exist as standalone programs in the <strong>Unix</strong>/<strong>Linux</strong> system.
+I think this aspect is both intriguing and confusing, since each implementation has it's own set of rules, settings and options.</p>
+<p>The great thing about this is that you can rely on having access to these functionalities no matter <em>which</em> unix system you're on.  They're very much universal.  They don't call it <strong>coreutils</strong> for nothing!  They're in fact <em>core</em> to the system!</p>
+<h3 id="env"><a class="header" href="#env">env</a></h3>
+<p><code>env</code> is a command that helps set the environment for a command.  If used with no arguments it prints <em>all</em> the environment information available.
+This command isn't a bash builtin, but it's definitely available on any <strong>POSIX</strong> OS.  To find the POSIX manual for <code>env</code>, use <code>man 1p env</code>.</p>
+<h3 id="which"><a class="header" href="#which">which</a></h3>
+<p>This is both a standalone program <em>and</em> a <strong>Zsh</strong> builtin.  It is <em>not</em> a <strong>Bash</strong> builtin!<br />
+It is used to find where an executable is located.  Use <code>which -a &lt;progname&gt;</code> to list all occurances of the specific program.
+In <strong>Zsh</strong>, it also lists aliases and functions.
+When used from <strong>Zsh</strong>, it is actually a link to the <code>whence</code> builtin.
+Using <code>run-help which</code> will bring up the help page for <code>whence</code>.
+The <code>which</code> command in <strong>Zsh</strong> is equivalent to <code>whence -c</code>.  <code>-c</code> option just outputs in <code>csh</code> format, otherwise it's the same as <code>whence</code>.
+The difference between the <code>which</code> standalone exe and the <strong>Zsh</strong> version is that it works for finding shell functions and aliases too.
+Say you have an alias for <code>ls -alhF</code> with the name <code>l</code>, you can type <code>which l</code> and it will output all the information about that alias.
+This is much more powerful than the standalone <code>which</code>, which can only locate executables in &quot;$PATH&quot;.</p>
+<h4 id="which-function-for-bash-and-csh"><a class="header" href="#which-function-for-bash-and-csh">which function for bash and csh</a></h4>
+<p><code>which</code> can be made into a function which will allow it to operate very similarly to <strong>Zsh's</strong> <code>which</code>.  Here it is:</p>
+<pre><code class="language-bash">    which ()
+    {
+        (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+    }
+    export -f which
+</code></pre>
+<h4 id="which-command-equivalent-in-powershell"><a class="header" href="#which-command-equivalent-in-powershell">which command equivalent in Powershell</a></h4>
+<p>Since <strong>Powershell</strong> treats everything as <em>objects</em> rather than just text, you get a lot of information
+back when you use <code>Get-Command</code> or <code>gcm</code> for short.<br />
+The way you get the same output as <code>which</code> would be to do this:</p>
+<pre><code class="language-powershell">Get-Command &quot;echo&quot; | Select-Object -ExpandProperty Source
+# Or
+gcm echo | select -exp Source
+# You can assign this as a function for less typing
+function pswhich {
+  Get-Command &quot;$args&quot; | Select-Object -expandproperty Source
+}
+# `$args' is the equivalent of `$*' in bash
+</code></pre>
+<h3 id="type-and-typeset"><a class="header" href="#type-and-typeset"><code>type</code> and <code>typeset</code></a></h3>
+<p><code>type -a</code> can give a similar output that <code>which -a</code> does, except <code>type</code> tells you what kind
+of command it is.
+<code>type</code> and <code>typeset</code> are not separate executables.  They only exist as shell builtins.</p>
+<p><code>type</code> does some thing <em>completely</em> different in <strong>Windows</strong> <code>cmd</code>: it acts like unix <code>cat</code> and
+outputs the content of a file.</p>
+<p>The equivalent command in <strong>Powershell</strong> is <code>Get-Command -ShowCommandInfo</code>.
+Or <code>gcm -all echo</code> to get all echo commands.</p>
+<h3 id="pwd"><a class="header" href="#pwd">pwd</a></h3>
+<p><code>pwd</code> is available as both a <em>builtin</em> and <em>program</em> from <code>/bin/pwd</code> as part of coreutils.<br />
+<code>pwd</code> is available in <strong>Powershell</strong> as <code>Get-Location</code>.</p>
+<h3 id="true-and-false"><a class="header" href="#true-and-false">true and false</a></h3>
+<p><code>true</code> is both a program (<code>/usr/bin/true</code>) and a builtin for <code>zsh</code> and <code>bash</code>.
+It is part of <em>GNU coreutils</em>.<br />
+The shell builtin version usually supercedes <code>/usr/bin/true</code>.</p>
+<p><code>false</code> exists in <code>/usr/bin/false</code> as well as in builtins.</p>
+<h3 id="pushd-and-popd"><a class="header" href="#pushd-and-popd">pushd and popd</a></h3>
+<p><code>pushd</code> and <code>popd</code> are builtins in both <code>bash</code> and <code>zsh</code>.<br />
+They don't exist as separate programs, but I felt it was necessary to include them in the list.
+They allow you to add directories to the <em>dirstack</em>, which is a list of directories you can easily <code>cd</code> to.</p>
+<h3 id="shopt-and-setopt"><a class="header" href="#shopt-and-setopt">shopt and setopt</a></h3>
+<p><strong>Zsh</strong> and <strong>bash</strong> both have a command that allows for changing shell options on the fly.
+<code>shopt</code> is <strong>Bash</strong>'s way of setting options.
+<code>setopt</code> is <strong>Zsh</strong>'s way of setting options.<br />
+Also, both shells have a <code>set</code> command.</p>
+<h3 id="getopts-and-getopt"><a class="header" href="#getopts-and-getopt">getopts and getopt</a></h3>
+<p><code>getopts</code> is a shell builtin in both <strong>Bash</strong> and <strong>Zsh</strong>.<br />
+<code>getopt</code> is an external program from the <em>util-linux</em> utility bundle.<br />
+<em>util-linux</em> is found on most <strong>Linux</strong>-based OS's.</p>
+<h3 id="times-time"><a class="header" href="#times-time">times, time</a></h3>
+<p><code>time</code> is both an external program and a <strong>Bash</strong> builtin.  It reports the time consumed by a pipeline's execution.<br />
+<strong>Example</strong>: <code>time [ &lt;pipeline&gt; ]</code>; runs the pipeline and prints a report of time spent executing the command.
+Variables TIMEFORMAT (bash) and TIMEFMT (zsh) alter the output of the report.
+<code>time</code> is available as a <strong>Zsh</strong> command, but it's not reported as a <em>builtin</em>.
+<code>times</code> is a <strong>Bash</strong> and <strong>Zsh</strong> builtin.  It displays process times for the system.</p>
+<h2 id="programs-i-thought-were-builtins"><a class="header" href="#programs-i-thought-were-builtins">Programs I thought were builtins</a></h2>
+<p>Here lies a list of unix programs that I thought were actually builtins, but they're part of <em>coreutils</em>.</p>
+<h3 id="ls-and-dir"><a class="header" href="#ls-and-dir">ls and dir</a></h3>
+<ol>
+<li><code>ls</code>: lists the content of a directory.
+To get color output, you need to use <code>ls --color=auto</code>.</li>
+</ol>
+<blockquote>
+<p>It is an alias of the <strong>Powershell</strong> builtin <code>Get-ChildItem</code>.  By default, <code>Get-ChildItem</code> acts like <code>ls -l</code>.<br />
+If you want the traditional <code>ls</code> wide style, you have to use <code>Get-ChildItem | Format-Wide</code>.
+To get color output, use <code>Get-ChildItemColor</code>, an installed module from the internet.
+2. <code>dir</code>: does what <code>ls</code> does, but is usually aliased to something like <code>ls -lhF</code> for long-style output.
+3. <code>vdir</code>: does what <code>ls -l</code> does.  Use <code>--color=auto</code> to get color output.
+4. <code>dircolors</code>: this command allows you to setup color output on the <code>ls</code> and <code>dir</code> output.</p>
+</blockquote>
+<p>These and the other <em>coreutils</em> programs are documented in <code>info coreutils</code>.</p>
+<blockquote>
+<p><strong>Zsh</strong> actually has a bunch of file-system utilities as part of it's <code>zsh/files</code> module.
+Check <code>man zshmodules</code> for more info.</p>
+</blockquote>
+<h2 id="definitions-test"><a class="header" href="#definitions-test">Definitions test</a></h2>
+<p>This is to test how definitions are rendered.
+This technique only works when using <code>kramdown</code> to convert to html.
+The other tools <code>cmark-gfm</code>, <code>markdown</code>, <code>markdown-it</code>, <code>cmark-py3</code> don't process definition syntax like <code>kramdown</code> does.</p>
+<blockquote>
+<p><code>kramdown</code> is referenced as a <em>superset</em> of the <strong>Markdown</strong> language.</p>
+</blockquote>
+<p>First Term
+: This is the definition of the first term.</p>
+<p>Second Term
+: This is one definition of the second term.
+: This is another definition of the second term.</p>
+<h1 id="shell-scripts-as-programs"><a class="header" href="#shell-scripts-as-programs">Shell scripts as programs</a></h1>
+<p>There exist a bunch of programs in <code>/usr/bin</code> that are actual <strong>POSIX Shell Scripts</strong>.
+Here are a list of a few notable ones.</p>
+<h2 id="list-of-posix-shell-script-executables-in-usrbin"><a class="header" href="#list-of-posix-shell-script-executables-in-usrbin">List of posix shell script executables in /usr/bin</a></h2>
+<ul>
+<li><code>autoconf</code>: POSIX shell script as part of <strong>GNU Autotools</strong>.</li>
+<li><code>pass</code>: Popular linux password manager cli.  It's a Bash script.</li>
+</ul>
+<h2 id="list-of-perl-script-exes"><a class="header" href="#list-of-perl-script-exes">List of Perl script exes</a></h2>
+<ul>
+<li><code>autoscan</code>: part of <strong>GNU Autotools</strong></li>
+<li><code>ack</code>: a <code>grep</code>-like regex program.  Located at <code>/usr/bin/vendor_perl/ack</code></li>
+<li><code>atool</code>: a tool to work with archive formats.  Perl text exe.</li>
+<li><code>aclocal</code>: Part of <strong>GNU Autotools</strong>.  A tool to generate <code>aclocal.m4</code> script for the local machine.</li>
+</ul>
+<h2 id="nodejs-script"><a class="header" href="#nodejs-script">Nodejs Script</a></h2>
+<p>These are mostly <strong>UTF-8 Unicode</strong> text executables, while the shell scripts are mostly ASCII text exes.</p>
+<h2 id="remember"><a class="header" href="#remember">Remember</a></h2>
+<p>When coming across a text executable, I usually copy it to a &quot;copied_to_usr_bin&quot; folder.</p>
+<h1 id="type-literals-in-powershell"><a class="header" href="#type-literals-in-powershell">Type Literals in Powershell</a></h1>
+<p>Powershell is unique in that it can utilize the full power of the <em>.NET</em> type system.</p>
+<p>After all, <strong>Powershell</strong> is a full <em>object-oriented</em> interpreted language with way more features than Bash.
+It's syntax is just a bit different, that's all.</p>
+<p>You can use <em>type-literals</em> in your pwsh scripts.</p>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<p>This examples is from my <a href="https://github.com/awsomesawce/scripts-pwsh/blob/main/utils/getpsenv.ps1">getpsenv.ps1</a> script.</p>
+<pre><code class="language-powershell"># Set the SSL/TLS Protocol version before doing a web request.
+[System.Net.ServicePointManager]::SecurityProtocol = 'Tls12'
+Invoke-RestMethod -Uri 'https://httpbin.org/get' | convertfrom-json -ashashtable
+</code></pre>
+<p>Another cool way of using type-literals is to check strings and variables.
+This snippet is from my pwsh profile:</p>
+<pre><code class="language-powershell">$scrps = if ([string]::IsNullOrWhitespace($scrps)) {
+    &quot;$env:USERPROFILE\gitstuff\scripts-pwsh&quot;} else {Write-Error &quot;`$scrps is not null or whitespace&quot;}
+</code></pre>
+<p>You can even use type-literals to convert strings into base64.
+This is from <a href="">here</a></p>
+<pre><code class="language-powershell">$myStr = &quot;test string&quot;
+$myBytes = [system.text.encoding]::UTF8.GetBytes($myStr)
+$myEncoded = [convert]::ToBase64String($myBytes)
+return Write-Output $myEncoded
+Write-Output $myEncoded # =&gt; dGVzdCBzdHJpbmc=
+</code></pre>
+<p>Powershell includes nice tab-completion for type-literals, so if you type somthing
+like:
+<code>[System.Net.</code> and press <kbd>TAB</kbd>, you will cycle thru possible type names.</p>
+<p>If you're using the <em>PSReadline</em> module (which you should be), you can press <kbd>CTRL+Space</kbd> to get a full list of
+completions.</p>
+<blockquote>
+<p>I've tested <kbd>CTRL+Space</kbd> on Powershell Core for Linux on wsl's Ubuntu, and they seem to default on a
+different set of keybindings for working with <em>PSReadline</em>.
+Tab-completion on Linux Powershell works very similarly to Bash completion, so just pressing <kbd>TAB</kbd> <em>twice</em>
+on an arbitrary completion will show all completion choices.</p>
+</blockquote>
+<p>You can add a type from a <code>.dll</code> assembly into the current pwsh session by using <code>Add-Type -AssemblyName &quot;Some.Type.dll&quot;</code>
+At that point you can use tab-completion to again cycle thru possible type literals from that assembly.</p>
+<blockquote>
+<p>Pretty cool, huh?</p>
+</blockquote>
+<h1 id="tmux-commands"><a class="header" href="#tmux-commands">Tmux commands</a></h1>
+<p>Hello from tmux</p>
+<p><code>tmux</code> is an amazing <em>terminal multiplexer</em>.  This means that <code>tmux</code> can create multiple <em>sessions</em> and <em>windows</em> from one terminal window.
+If your terminal emulator (I use <strong>Windows Terminal</strong>) doesn't support multiple windows/tabs (mine does), you can use <code>tmux</code> to get that functionality from within the shell.</p>
+<p><code>byobu</code> is a <code>tmux</code> wrapper that adds some more functionality and keybindings to <code>tmux</code>.  It is written and maintained by a guy who works for the company that makes <strong>Ubuntu</strong>, the most popular Linux distribution.</p>
+<p><code>byobu</code> adds things like extra keybindings, extra features, more config options, easier config, and other things to <code>tmux</code>.</p>
+<p><code>byobu</code> also supports a program called <code>screen</code> which is a GNU project.  <code>screen</code> is a bit different from <code>tmux</code> but the premise is the same.  They both enable you to have multiple terminal windows/panes/sessions open at the same time.</p>
+<p><code>byobu</code> also adds more informative features like a info-bar on the bottom of the screen that gives information like:</p>
+<ul>
+<li>the current Linux distro you're using.</li>
+<li>The time and date.</li>
+<li>The speed of your processor.</li>
+</ul>
+<h2 id="other-things-byobu-adds"><a class="header" href="#other-things-byobu-adds">Other things Byobu adds</a></h2>
+<p>Easy config of the <em>prefix</em> command for operation with your terminal multiplexer of choice.<br />
+For instance, you can change the default prefix key from <code>Ctrl-B</code> (for tmux) to <code>Ctrl-A</code> (which is the screen prefix key).
+This might be convenient for someone who doesn't use <code>C-a</code> on the cmdline.  Normally <code>C-a</code> brings your cursor to the beginning of the line.  But if you'd rather use, for instance, the <code>&lt;HOME&gt;</code> key, you can set <code>C-a</code> to be your prefix key and do things like <code>C-a n</code> to go to next tmux window or <code>C-a c</code> to create a new window.</p>
+<p><code>byobu</code> adds a bunch of scripts and programs to your bin.  They all begin with <code>byobu-</code>, so type that into your <code>bash</code> or <code>zsh</code> command line and type <code>&lt;TAB&gt;</code> to see all of your choices.</p>
+<p><code>byobu</code>'s documentation is extremely consise.  Every <code>byobu-*</code> tool has it's own <strong>manpage</strong>.<br />
+You can type <code>man byobu-</code> and press <code>&lt;TAB&gt;</code> to see all the manpages available.</p>
+<h3 id="list-of-some-byobu--manpages"><a class="header" href="#list-of-some-byobu--manpages">List of some byobu-* manpages</a></h3>
+<ul>
+<li><code>byobu-config</code>: gives you an <em>ncurses</em> menu for altering the configuration of <code>byobu</code>.</li>
+<li><code>byobu-ctrl-a</code>: This convenient script allows you to easily modify your prefix key from <code>Ctrl-b</code> back to <code>Ctrl-a</code> and vise-versa.</li>
+<li><input disabled="" type="checkbox"/>
+TODO <code>byobu-</code></li>
+</ul>
+<h1 id="markdown-renderers"><a class="header" href="#markdown-renderers">Markdown Renderers</a></h1>
+<p>Markdown renderers come in many different shapes and sizes.<br />
+There has been an attempt to standardize the language by introducing the <strong>CommonMark</strong> specification.
+This is a good thing since so many people rely on <strong>Markdown</strong> syntax to write their site content or books or journal entries or just plain notes!</p>
+<p>This is what makes <strong>Markdown</strong> so special.  It has so many uses.
+The implementations differ slightly, but you can expect a certain set of features to be present in <em>all</em> implementations. These features include:</p>
+<h2 id="list-of-markdown-renderers"><a class="header" href="#list-of-markdown-renderers">List of markdown renderers</a></h2>
+<p>Here shall be a list of all types of <code>markdown</code> processors, converters, and renderers.</p>
+<ul>
+<li><a href="https://github.com/markdown-it/markdown-it">Markdown-it</a>: an npm package that enables smart converting of markdown to html.  Comes with cli and api.</li>
+</ul>
+<blockquote>
+<p>There is a python version of <code>markdown-it</code> <a href="https://pypi.org/project/markdown-it-py/">here</a> with it's docs <a href="https://markdown-it-py.readthedocs.io/en/latest/index.html">here</a></p>
+</blockquote>
+<ul>
+<li><code>kramdown</code>: a <em>Rubygem</em> that is essentially a <em>superset</em> of markdown.</li>
+<li><code>mdbook</code>: a <em>gitbook</em>-like program written in <code>rust</code>.</li>
+</ul>
+<blockquote>
+<p><code>mdbook</code> is more than just a markdown parser and renderer.
+It's more like a documentation generator and simple static-site-generator.</p>
+</blockquote>
+<ul>
+<li><code>markdownlint</code>: an npm package that enables linting of markdown documents.</li>
+<li><code>markdown_py</code>: a <em>python</em> version of the original <code>markdown</code> program written in C.</li>
+<li><code>discount</code>: Old markdown renderer written in C</li>
+</ul>
+<h1 id="just-found-out"><a class="header" href="#just-found-out">Just Found Out</a></h1>
+<p>Here is where I write things I just found out that are interesting.</p>
+<blockquote>
+<p>The same people behind some of the biggest compression/archive programs are the official authors of the <code>zlib</code> library!
+That includes Jean-Loup Gailly and Mark Adler</p>
+</blockquote>
+<h1 id="other-languages"><a class="header" href="#other-languages">Other languages</a></h1>
+<p>Here's a list of other languages I'd like to learn.</p>
+<p>I'll put &quot;INSTALLED&quot; if I have installed the necessary SDKs for each language.</p>
+<h2 id="list-of-languages"><a class="header" href="#list-of-languages">List of languages</a></h2>
+<ul>
+<li><strong>Lisp</strong>-type languages
+<ul>
+<li><strong>Clojure</strong> <em>INSTALLED</em>:
+<ul>
+<li>Vim plugin <strong>Conjure</strong> <em>INSTALLED</em></li>
+</ul>
+</li>
+<li><strong>Common Lisp</strong> <em>INSTALLED</em></li>
+<li><strong>Guile</strong></li>
+</ul>
+</li>
+<li><strong>Java</strong> <em>INSTALLED</em> (<code>java</code>)</li>
+<li><strong>NodeJS</strong> <em>INSTALLED</em> (<code>nodejs</code>, <code>npm</code>, <code>yarn</code>)
+<ul>
+<li>Vim plugin <strong>Vim-Javascript</strong> <em>INSTALLED</em></li>
+</ul>
+</li>
+<li><strong>C</strong>-like languages
+<ul>
+<li><strong>Rust</strong> <em>INSTALLED</em> (<code>rustup</code>)</li>
+<li><strong>Go</strong> <em>INSTALLED</em> (<code>go</code>)</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
