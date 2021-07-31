@@ -10,9 +10,6 @@ mdbook -MakeTarfile -Git
 Tweak the directory target variables to use yourself.
 #>
 
-$env:PAGER = 'less'
-
-
 param([switch]$MakeTarfile, [switch]$Git)
 $origdir = "$env:USERPROFILE\gitstuff\mdbook_test"
 $destdir = "$env:USERPROFILE\gitstuff\mdbook_test_build"
