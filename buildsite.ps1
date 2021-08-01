@@ -16,7 +16,12 @@ $destdir = "$env:USERPROFILE\gitstuff\mdbook_test_build"
 #$a = "$((Split-Path -Parent $origdir).FullName)\mdbook_test_build"
 $srcdir = 'book'
 
-if (Test-Path book) { throw "book dir found, autoclean not implemented yet" }
+if (Test-Path book) { 
+    write-verbose "./book dir found, running mdbook clean"
+    # TODO implement DRY principle for this.  mdbook exe should be determined at beginning
+    # of script.
+    (gcm mdbook -erroraction ignore) ? (mdbook clean) : (throw "mdbook not on path")
+}
 if (gcm mdbook -ErrorAction ignore) { mdbook build } else { throw "mdbook not on path" }
 if ($MakeTarfile) {
     (Test-Path $srcdir) ? (bsdtar -acvf "mdbookout_$(Get-Date -Format FileDate).tar.xz" book/*) : (Write-Error "book dir not found")
