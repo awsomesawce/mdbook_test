@@ -12,3 +12,13 @@ will make a tarfile of the output of `mdbook build` and also copy files from `.\
 my build git repo.
 
 And in addition to that, it will _push_ the additions to remote!
+
+## Creating ordered dictionarys in Powershell
+
+Super easy way to create an ordered dict is with this syntax:
+
+```powershell
+$dict = [ordered]@{name = "Carl"; color = "Blue"}
+# Check the type with .getType()
+$dict.Gettype()
+```
