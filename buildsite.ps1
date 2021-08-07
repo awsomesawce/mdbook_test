@@ -19,7 +19,7 @@ $srcdir = 'book'
 $VerbosePreference = 'Continue'
 
 if (Test-Path book) { 
-    write-verbose "./book dir found, running mdbook clean"
+    write-host -fore yellow "./book dir found, running mdbook clean"
     # TODO implement DRY principle for this.  mdbook exe should be determined at beginning
     # of script.
     (gcm mdbook -erroraction ignore) ? (mdbook clean) : (throw "mdbook not on path")
@@ -31,15 +31,15 @@ if ($MakeTarfile) {
 if (Test-Path $destdir) {
     Write-Output "copying contents of book/* to ../mdbook_test_build"
     Copy-Item .\book\* -Destination ..\mdbook_test_build\ -Recurse -Force
-    cd $destdir && Write-Output "Changed dir to mdbook_test_build"
+    cd $destdir && Write-host -fore yellow "Changed dir to mdbook_test_build"
     # Add switch for using git :complete:
     if ($Git) {
         git add . && git commit -m "Update site"
-        git pull && git push && Write-Output "pulling and pushing to site"
+        git pull && git push && Write-host -fore yellow "pulling and pushing to site"
         cd $origdir && Write-Host -ForegroundColor Yellow "You are back in the starting dir $origdir"
-        Write-Host -ForegroundColor Yellow "Function complete!"
     }
 }
 else { throw "../mdbook_test_build not found"
 }
 
+Write-Host -ForegroundColor cyan "Function complete!"
