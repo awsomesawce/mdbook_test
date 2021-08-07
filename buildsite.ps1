@@ -9,12 +9,14 @@ mdbook -MakeTarfile -Git
 .NOTES
 Tweak the directory target variables to use yourself.
 #>
-
+[cmdletbinding()]
 param([switch]$MakeTarfile, [switch]$Git)
 $origdir = "$env:USERPROFILE\gitstuff\mdbook_test"
 $destdir = "$env:USERPROFILE\gitstuff\mdbook_test_build"
 #$a = "$((Split-Path -Parent $origdir).FullName)\mdbook_test_build"
 $srcdir = 'book'
+# Temporarily set verbose preference
+$VerbosePreference = 'Continue'
 
 if (Test-Path book) { 
     write-verbose "./book dir found, running mdbook clean"
