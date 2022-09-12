@@ -3,6 +3,10 @@
 .Description
 IT WORKS! This script builds the site using mdbook and
 optionally makes a backup tarfile and pushes to git
+Automation is _king_.
+Update: 1/4/22
+It works just fine except for the fact that you can't rely on `bsdtar` to be installed
+on machines.  `tar` is more widely available.
 .Example
 mdbook -MakeTarfile -Git
 => Builds site, makes dated tarfile, and pushes to git
@@ -24,14 +28,14 @@ if (Test-Path book) {
     # of script.
     (gcm mdbook -erroraction ignore) ? (mdbook clean) : (throw "mdbook not on path")
 }
-if (gcm mdbook -ErrorAction ignore) { mdbook build } else { throw "mdbook not on path" }
+if (get-command mdbook -ErrorAction ignore) { mdbook build } else { throw "mdbook not on path" }
 if ($MakeTarfile) {
-    (Test-Path $srcdir) ? (bsdtar -acvf "mdbookout_$(Get-Date -Format FileDate).tar.xz" book/*) : (Write-Error "book dir not found")
+    (Test-Path $srcdir) ? (tar -acvf "mdbookout_$(Get-Date -Format FileDate).tar.xz" book/*) : (Write-Error "book dir not found")
 }
 if (Test-Path $destdir) {
     Write-Output "copying contents of book/* to ../mdbook_test_build"
     Copy-Item .\book\* -Destination ..\mdbook_test_build\ -Recurse -Force
-    cd $destdir && Write-host -fore yellow "Changed dir to mdbook_test_build"
+    set-location $destdir && Write-host -fore yellow "Changed dir to mdbook_test_build"
     # Add switch for using git :complete:
     if ($Git) {
         git add . && git commit -m "Update site"
